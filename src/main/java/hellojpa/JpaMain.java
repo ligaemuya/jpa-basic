@@ -82,6 +82,20 @@ public class JpaMain {
             em.persist(member);
             em.flush();
              */
+            Member member = em.find(Member.class, 150L);
+            member.setName("AAAAA");
+            
+            
+            //준영속상태로 전환
+            em.detach(member);
+
+            // 영속성 컨텍스트를 완전히 초기화
+            // em.clear()
+            // Member member2 = em.find(Member.class, 150L);
+
+            // 영속성 컨텍스트를 종료
+            // em.close()
+
             System.out.println("=============================");
             
             tx.commit();
