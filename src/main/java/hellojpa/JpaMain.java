@@ -82,6 +82,7 @@ public class JpaMain {
             em.persist(member);
             em.flush();
              */
+            /*
             Member member = em.find(Member.class, 150L);
             member.setName("AAAAA");
             
@@ -97,7 +98,7 @@ public class JpaMain {
             // em.close()
 
             System.out.println("=============================");
-            
+            */
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
