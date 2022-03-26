@@ -99,12 +99,25 @@ public class JpaMain {
 
             System.out.println("=============================");
             */
+            /*
             Member member = new Member();
             member.setUsername("C");
             System.out.println("==================================");
             em.persist(member);
             System.out.println("member.getId() = " + member.getId());
             System.out.println("==================================");
+             */
+
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
+
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeamId(team.getId());
+            member.setTeamId(team.getId());
+            em.persist(member);
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
