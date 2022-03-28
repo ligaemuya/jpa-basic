@@ -119,7 +119,7 @@ public class JpaMain {
 
             em.flush();
             em.clear();
-
+/*
             Member findMember = em.find(Member.class, member.getId());
 //            Team findTeam = findMember.getTeam();
 //            System.out.println("findTeam = " + findTeam.getName());
@@ -130,6 +130,7 @@ public class JpaMain {
             for (Member m : members) {
                 System.out.println("m = " + m.getUsername());
             }
+ */
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
