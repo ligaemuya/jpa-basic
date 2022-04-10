@@ -111,11 +111,8 @@ public class JpaMain {
             Team team = new Team();
             team.setName("TeamA");
             em.persist(team);
-
-            Member member = new Member();
-            member.setUsername("member1");
 //            member.changeTeam(team);
-            em.persist(member);
+            Member member = saveMember(em);
 
             team.addMember(member);
 
@@ -150,5 +147,13 @@ public class JpaMain {
             em.close();
         }
         emf.close();
+    }
+
+    private static Member saveMember(EntityManager em) {
+        Member member = new Member();
+        member.setUsername("member1");
+
+        em.persist(member);
+        return member;
     }
 }
