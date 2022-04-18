@@ -107,7 +107,7 @@ public class JpaMain {
             System.out.println("member.getId() = " + member.getId());
             System.out.println("==================================");
              */
-
+/*
             Team team = new Team();
             team.setName("TeamA");
             em.persist(team);
@@ -127,6 +127,7 @@ public class JpaMain {
             System.out.println("==============================");
             System.out.println("findTeam = " + findTeam);
             System.out.println("==============================");
+            */
 /*
             Member findMember = em.find(Member.class, member.getId());
 //            Team findTeam = findMember.getTeam();
@@ -139,8 +140,22 @@ public class JpaMain {
                 System.out.println("m = " + m.getUsername());
             }
  */
+
+            Movie movie = new Movie();
+            movie.setDirector("aaa");
+            movie.setActor("bbb");
+            movie.setName("반칙왕");
+            movie.setPrice(10000);
+            em.persist(movie);
+
+
+
+
+
+
             tx.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             tx.rollback();
         } finally {
             //code
