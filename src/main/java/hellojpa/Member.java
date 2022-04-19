@@ -1,6 +1,7 @@
 package hellojpa;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
         sequenceName = "MEMBER_SEQ", //매핑할 데이터베이스 시퀀스 이름
         initialValue = 1, allocationSize = 50
 )
-public class Member {
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -35,6 +36,8 @@ public class Member {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
     private Team team;
+
+
 
     public Long getId() {
         return id;
