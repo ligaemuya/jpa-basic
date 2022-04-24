@@ -22,8 +22,9 @@ public class Member extends BaseEntity {
     @Column(name = "USERNAME")
     private String username;
 
-//    @Column(name = "TEAM_ID")
-//    private Long teamId;
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
+    private Team team;
 
     @OneToOne
     @JoinColumn(name = "LOCKER_ID")
@@ -33,9 +34,9 @@ public class Member extends BaseEntity {
     @JoinTable(name = "MEMBER_PRODUCT")
     private List<MemberProduct> memberProducts = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
-    private Team team;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
+//    private Team team;
 
 
 
