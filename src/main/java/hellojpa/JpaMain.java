@@ -1,5 +1,7 @@
 package hellojpa;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -164,17 +166,41 @@ public class JpaMain {
             member.setUsername("hello");
             em.persist(member);
 
+           /* Member member1 = new Member();
+            member1.setUsername("hello1");
+            em.persist(member1);*/
             em.flush();
             em.clear();
 
             //
-            Member findMember = em.find(Member.class, member.getId());
-            System.out.println("findMember = " + findMember.getId());
-            System.out.println("findMember = " + findMember.getUsername());
+//            Member findMember = em.find(Member.class, member.getId());
+//            System.out.println("findMember = " + findMember.getId());
+//            System.out.println("findMember = " + findMember.getUsername());
 
-            Member referenceMember = em.getReference(Member.class, member.getId());
-            System.out.println("referenceMember = " + referenceMember);
+//            Member referenceMember = em.getReference(Member.class, member.getId());
+//            System.out.println("before referenceMember.class = " + referenceMember.getClass());
+//            System.out.println("referenceMember = " + referenceMember);
+//            System.out.println("after referenceMember.class = " + referenceMember.getClass());
+            Member refMember = em.getReference(Member.class, member.getId());
+//            Member m1 = em.getReference(Member.class, member1.getId());
+//            logic(m, m1);
 
+            System.out.println("refMember = " + refMember.getClass()); // Proxy
+//            refMember.getUsername(); //강제 초기화
+
+            Hibernate.initialize(refMember); //강제 초기화
+
+
+//            refMember.getUsername();
+//            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(refMember));
+//            Member findMember = em.find(Member.class, member.getId());
+//            System.out.println("findMember = " + findMember.getClass());
+//
+//            System.out.println("a == a: = " + (refMember == findMember));
+//            em.detach(refMember);
+//            em.close();
+
+//            refMember.getUsername();
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -184,6 +210,11 @@ public class JpaMain {
             em.close();
         }
         emf.close();
+    }
+
+    private static void logic(Member m, Member m1) {
+        System.out.println("m == m2: " + (m1 instanceof Member));
+        System.out.println("m == m2: " + (m instanceof Member));
     }
 
     private static void printMember(Member member) {
