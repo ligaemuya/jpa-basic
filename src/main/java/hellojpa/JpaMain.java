@@ -21,20 +21,22 @@ public class JpaMain {
         tx.begin();
         try {
 
-            Child child1 = new Child();
-            Child child2 = new Child();
+            Address address = new Address("city", "street", "1000");
 
-            Parent parent = new Parent();
-            parent.addChild(child1);
-            parent.addChild(child2);
+            Member member = new Member();
+            member.setUsername("hello");
+            member.setHomeaddress(address);
+            em.persist(member);
 
-            em.persist(parent);
-            em.flush();
-            em.clear();
+            Address copyAddress = new Address(address.getCity(), address.getStreet(), address.getZipCode());
 
-            Parent parent1 = em.find(Parent.class, parent.getId());
-            parent1.getChildList().remove(0);
-            
+            Member member1 = new Member();
+            member1.setUsername("hello1");
+            member1.setHomeaddress(copyAddress);
+            em.persist(member1);
+
+            //
+            member.getHomeaddress().setCity("newCity");
 
             tx.commit();
         } catch (Exception e) {
@@ -50,25 +52,5 @@ public class JpaMain {
     private static void logic(Member m, Member m1) {
         System.out.println("m == m2: " + (m1 instanceof Member));
         System.out.println("m == m2: " + (m instanceof Member));
-    }
-
-    private static void printMember(Member member) {
-        System.out.println("member = " + member.getUsername());
-    }
-
-    private static void printMemberAndTeam(Member member) {
-        String username = member.getUsername();
-        System.out.println("username = " + username);
-
-        Team team = member.getTeam();
-        System.out.println("team = " + team.getName() );
-    }
-
-    private static Member saveMember(EntityManager em) {
-        Member member = new Member();
-        member.setUsername("member1");
-
-        em.persist(member);
-        return member;
     }
 }

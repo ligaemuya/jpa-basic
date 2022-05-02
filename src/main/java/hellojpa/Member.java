@@ -22,7 +22,60 @@ public class Member extends BaseEntity {
     @Column(name = "USERNAME")
     private String username;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    //기간 Period
+    @Embedded
+    private Period period;
+
+
+    //주소
+    @Embedded
+    private Address homeaddress;
+
+    //주소
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="city",
+                    column=@Column(name = "WORK_CITY")),
+            @AttributeOverride(name="street",
+                    column=@Column(name = "WORK_STREET")),
+            @AttributeOverride(name="zipCode",
+                    column=@Column(name = "WORK_ZIPCODE"))
+    })
+    private Address workAddress;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Period getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(Period period) {
+        this.period = period;
+    }
+
+    public Address getHomeaddress() {
+        return homeaddress;
+    }
+
+    public void setHomeaddress(Address homeaddress) {
+        this.homeaddress = homeaddress;
+    }
+
+    /* @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private Team team;
 
@@ -32,7 +85,7 @@ public class Member extends BaseEntity {
 
     @ManyToMany
     @JoinTable(name = "MEMBER_PRODUCT")
-    private List<MemberProduct> memberProducts = new ArrayList<>();
+    private List<MemberProduct> memberProducts = new ArrayList<>();*/
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
@@ -40,7 +93,7 @@ public class Member extends BaseEntity {
 
 
 
-    public Long getId() {
+    /*public Long getId() {
         return id;
     }
 
@@ -63,12 +116,12 @@ public class Member extends BaseEntity {
     public void setTeam(Team team) {
         this.team = team;
     }
-    /*
+    *//*
     public void changeTeam(Team team) {
         this.team = team;
         team.getMembers().add(this);
     }
-    */
+    *//*
 
     @Override
     public String toString() {
@@ -77,5 +130,5 @@ public class Member extends BaseEntity {
                 ", username='" + username + '\'' +
                 ", team=" + team +
                 '}';
-    }
+    }*/
 }
