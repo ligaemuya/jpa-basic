@@ -2,6 +2,7 @@ package hellojpa;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.util.Objects;
 
 @Embeddable
 public class Address {
@@ -26,7 +27,7 @@ public class Address {
         return city;
     }
 
-    public void setCity(String city) {
+    private void setCity(String city) {
         this.city = city;
     }
 
@@ -34,7 +35,7 @@ public class Address {
         return street;
     }
 
-    public void setStreet(String street) {
+    private void setStreet(String street) {
         this.street = street;
     }
 
@@ -42,7 +43,20 @@ public class Address {
         return zipCode;
     }
 
-    public void setZipCode(String zipCode) {
+    private void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return Objects.equals(city, address.city) && Objects.equals(street, address.street) && Objects.equals(zipCode, address.zipCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(city, street, zipCode);
     }
 }

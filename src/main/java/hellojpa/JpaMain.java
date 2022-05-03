@@ -28,15 +28,8 @@ public class JpaMain {
             member.setHomeaddress(address);
             em.persist(member);
 
-            Address copyAddress = new Address(address.getCity(), address.getStreet(), address.getZipCode());
-
-            Member member1 = new Member();
-            member1.setUsername("hello1");
-            member1.setHomeaddress(copyAddress);
-            em.persist(member1);
-
-            //
-            member.getHomeaddress().setCity("newCity");
+            Address newAddress = new Address("NewCity", address.getStreet(), address.getZipCode());
+            member.setHomeaddress(newAddress);
 
             tx.commit();
         } catch (Exception e) {
