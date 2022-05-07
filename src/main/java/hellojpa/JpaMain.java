@@ -29,8 +29,7 @@ public class JpaMain {
             member.getFavoriteFoods().add("족발");
             member.getFavoriteFoods().add("피자");
 
-            member.getAddressHistory().add(new Address("old1", "street", "100000"));
-            member.getAddressHistory().add(new Address("old2", "street", "100000"));
+            
             em.persist(member);
 
 
