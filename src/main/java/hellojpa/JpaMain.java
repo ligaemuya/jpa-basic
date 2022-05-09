@@ -2,10 +2,7 @@ package hellojpa;
 
 import org.hibernate.Hibernate;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,17 +18,11 @@ public class JpaMain {
         tx.begin();
         try {
 
-            Member member = new Member();
-            member.setUsername("member1");
-            member.setHomeaddress(new Address("homeCity", "street", "100000"));
 
-            member.getFavoriteFoods().add("치킨");
-            member.getFavoriteFoods().add("족발");
-            member.getFavoriteFoods().add("피자");
-
-            
-            em.persist(member);
-
+            List<Member> result = em.createQuery("select m From Member m where m.username like '%kim%'", Member.class).getResultList();
+            for (Member member : result) {
+                System.out.println("member = " + member);
+            }
 
 
             tx.commit();
